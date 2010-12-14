@@ -1,7 +1,3 @@
 .classpath
 .settings
 .project
-target
-stage
-resources
-application.properties
