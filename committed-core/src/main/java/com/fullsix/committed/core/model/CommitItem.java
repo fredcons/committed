@@ -6,7 +6,7 @@ import com.google.code.morphia.annotations.Indexed;
  * File
  * Created on 22 juin 10
  * @author Fred Cons (<i>cons@fullsix.com</i>)
- * @version $Revision$
+ * @version $Revision$path
  * $Id$
  */
 public class CommitItem {

@@ -1,6 +1,7 @@
 package com.fullsix.committed.core.dao;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.util.StringUtils;
@@ -39,11 +40,11 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
             Pattern textRegexp = Pattern.compile(search.getText(), Pattern.CASE_INSENSITIVE);
             query.filter("comment", textRegexp);
         }
-        if (search.getLastModifiedBefore() != null) {
-            query.filter("date <=", search.getLastModifiedBefore());
+        if (search.getModifiedBefore() != null) {
+            query.filter("date <=", search.getModifiedBefore());
         }
-        if (search.getLastModifiedAfter() != null) {
-            query.filter("date >=", search.getLastModifiedAfter());
+        if (search.getModifiedAfter() != null) {
+            query.filter("date >=", search.getModifiedAfter());
         }
         
         result.setTotalCommits(count(query));        
@@ -52,11 +53,27 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
              .limit(search.getRows());
         
         query.order("-date");
-        
         QueryResults<Commit> queryResult = this.find(query);
         result.setCommits(queryResult.asList());
         result.setQueryTime(System.currentTimeMillis() - start);
         return result;
     }
+    
+    @SuppressWarnings("unchecked")
+    public List<String> listDistinctRootPaths() {
+    	return this.getCollection().distinct("repositoryPath");
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<String> listDistinctFilePaths() {
+    	return this.getCollection().distinct("commitItems.path");
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<String> listDistinctAuthors() {
+    	return this.getCollection().distinct("author");
+    }
+    
+    
 
 }

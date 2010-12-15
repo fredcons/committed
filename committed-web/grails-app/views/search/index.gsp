@@ -64,19 +64,23 @@
 	            <g:hiddenField name="go" value="true" />
 	            <g:hiddenField name="pageNumber" value="1" /> 
 	        	<table>
+	        	    <tr>
+                        <td>Repository: </td>
+                        <td><g:select name="rootPath" from="${svnSearch?.rootPaths}" /> </td>
+                    </tr>	
+                    <tr>
+                        <td>Auteur: </td>
+                        <td><g:select name="author" from="${svnSearch?.authors}" /> </td>
+                    </tr>           	
 	        		<tr>
 	        			<td>Texte libre : </td>
 	        			<td><g:textField name="text" value="${svnSearch?.text}" /> </td>
 	        		</tr>
 	        		<tr>
-	        			<td>Auteur : </td>
-	        			<td><g:textField name="author" value="${svnSearch?.author}" /></td>
-	        		</tr>
-	        		<tr>
-	        			<td>Dernière modification : </td>
+	        			<td>Date : </td>
 	        			<td>
-	        			Entre le <g:datePicker name="lastModifiedAfter" value="${svnSearch?.lastModifiedAfter}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/> 
-	        			et le <g:datePicker name="lastModifiedBefore" value="${svnSearch?.lastModifiedBefore}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
+	        			Entre le <g:datePicker name="modifiedAfter" value="${svnSearch?.modifiedAfter}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/> 
+	        			et le <g:datePicker name="modifiedBefore" value="${svnSearch?.modifiedBefore}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
 	        		</tr>	        		
 	        		<tr>
 	        			<td></td>

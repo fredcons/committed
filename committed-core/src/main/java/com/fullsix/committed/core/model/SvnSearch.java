@@ -18,8 +18,8 @@ public class SvnSearch {
     
     String text;
     String author;
-    Date lastModifiedBefore;
-    Date lastModifiedAfter;
+    Date modifiedBefore;
+    Date modifiedAfter;
         
     Sort sortDirection;
     int pageNumber;
@@ -71,31 +71,31 @@ public class SvnSearch {
     }
     
     /**
-     * @return the lastModifiedBefore
+     * @return the modifiedBefore
      */
-    public Date getLastModifiedBefore() {
-        return this.lastModifiedBefore;
+    public Date getModifiedBefore() {
+        return this.modifiedBefore;
     }
     
     /**
-     * @param lastModifiedBefore the lastModifiedBefore to set
+     * @param modifiedBefore the modifiedBefore to set
      */
-    public void setLastModifiedBefore(Date lastModifiedBefore) {
-        this.lastModifiedBefore = lastModifiedBefore;
+    public void setModifiedBefore(Date modifiedBefore) {
+        this.modifiedBefore = modifiedBefore;
     }
     
     /**
-     * @return the lastModifiedAfter
+     * @return the modifiedAfter
      */
-    public Date getLastModifiedAfter() {
-        return this.lastModifiedAfter;
+    public Date getModifiedAfter() {
+        return this.modifiedAfter;
     }
     
     /**
-     * @param lastModifiedAfter the lastModifiedAfter to set
+     * @param modifiedAfter the modifiedAfter to set
      */
-    public void setLastModifiedAfter(Date lastModifiedAfter) {
-        this.lastModifiedAfter = lastModifiedAfter;
+    public void setModifiedAfter(Date modifiedAfter) {
+        this.modifiedAfter = modifiedAfter;
     }
     
     /**

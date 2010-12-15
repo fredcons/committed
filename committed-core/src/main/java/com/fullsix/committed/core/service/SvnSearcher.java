@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import com.fullsix.committed.core.dao.CommitDao;
 import com.fullsix.committed.core.model.SvnSearch;
+import com.fullsix.committed.core.model.SvnSearchFormData;
 import com.fullsix.committed.core.model.SvnSearchResult;
 
 /**
@@ -25,6 +26,13 @@ public class SvnSearcher {
         return commitDao.search(search);
     }
 
+    public SvnSearchFormData initSearchData() {
+    	SvnSearchFormData formData = new SvnSearchFormData();
+    	formData.setAuthors(commitDao.listDistinctAuthors());
+    	formData.setFilePaths(commitDao.listDistinctFilePaths());
+    	formData.setRootPaths(commitDao.listDistinctRootPaths());
+    	return formData;
+    }
 
     /**
      * @param commitDao the commitDao to set
