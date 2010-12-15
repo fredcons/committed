@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    $Author: cons $
+    $Id: pom.xml 68282 2010-04-29 15:39:18Z cons $
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.fullsix.committed</groupId>
+    <artifactId>committed-core</artifactId>    
+    <parent>
+        <groupId>com.fullsix.committed</groupId>
+        <artifactId>committed-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <packaging>jar</packaging>
+    <name>committed core</name>
+    <description>committed core</description>
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>        
+        </dependency>    
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.morphia</groupId>
+            <artifactId>morphia</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.proxytoys</groupId>
+            <artifactId>proxytoys</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <classifier>${testng.classifier}</classifier>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+</project>
+
+
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    - Application context definition
+    $Id: svndigger-indexer-context.xml 69683 2010-05-12 15:47:36Z cons $
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        
+    <context:property-placeholder location="classpath:com/fullsix/committed/batch/config/common.properties"/>
+    <context:component-scan base-package="com.fullsix" />
+    
+    <import resource="classpath:com/fullsix/committed/core/committed-core-context.xml"/>
+        
+    <bean id="svnConfiguration" class="com.fullsix.committed.core.model.SvnConfiguration">
+        <property name="svnUsername" value="${svn.username}" />
+        <property name="svnPassword" value="${svn.password}" />
+        <property name="svnUrl" value="${svn.url}" />
+    </bean>
+    
+    <util:list id="repositories">
+        <bean class="com.fullsix.committed.core.model.Repository">
+            <property name="svnUrl" value="${svn.url}" />
+            <property name="svnPath" value="/renault" />
+        </bean>
+        <bean class="com.fullsix.committed.core.model.Repository">
+            <property name="svnUrl" value="${svn.url}" />
+            <property name="svnPath" value="/html" />
+        </bean>
+        <bean class="com.fullsix.committed.core.model.Repository">
+            <property name="svnUrl" value="${svn.url}" />
+            <property name="svnPath" value="/dfo-flash" />
+        </bean>
+        <bean class="com.fullsix.committed.core.model.Repository">
+            <property name="svnUrl" value="${svn.url}" />
+            <property name="svnPath" value="/dfo-flex" />
+        </bean>
+        <bean class="com.fullsix.committed.core.model.Repository">
+            <property name="svnUrl" value="${svn.url}" />
+            <property name="svnPath" value="/" />
+        </bean>
+    </util:list>
+    
+</beans>

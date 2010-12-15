@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    - Application context definition
+    $Id: svndigger-indexer-context.xml 69683 2010-05-12 15:47:36Z cons $
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        
+    <import resource="classpath:com/fullsix/committed/core/committed-core-context.xml"/>
+    
+    <context:property-placeholder location="classpath:com/fullsix/committed/core/test/config/common.properties"/>
+    
+    <context:component-scan base-package="com.fullsix" />
+
+</beans>

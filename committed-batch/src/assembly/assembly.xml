@@ -1,0 +1,32 @@
+<!-- $Id: assembly.xml 68282 2010-04-29 15:39:18Z cons $ -->
+<assembly>
+        <formats>
+                <format>dir</format>
+        </formats>
+        <fileSets>
+                <fileSet>
+                        <directory>target</directory>
+                        <outputDirectory>lib</outputDirectory>
+                        <includes>
+                                <include>*.jar</include>
+                        </includes>
+                </fileSet>
+                <fileSet>
+                        <directory>src/main/shell/conf</directory>
+                        <outputDirectory>conf</outputDirectory>
+                </fileSet>
+        </fileSets>
+        <files>
+            <file>
+                <source>src/main/shell/index.sh</source>
+                <fileMode>0755</fileMode>
+                <lineEnding>unix</lineEnding>
+            </file>
+        </files>
+        <dependencySets>
+                <dependencySet>
+                        <scope>runtime</scope>
+                        <outputDirectory>lib</outputDirectory>
+                </dependencySet>
+        </dependencySets>
+</assembly>
