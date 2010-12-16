@@ -29,7 +29,7 @@ public class SvnSearcher {
     public SvnSearchFormData initSearchData() {
     	SvnSearchFormData formData = new SvnSearchFormData();
     	formData.setAuthors(commitDao.listDistinctAuthors());
-    	formData.setFilePaths(commitDao.listDistinctFilePaths());
+    	//formData.setFilePaths(commitDao.listDistinctFilePaths());
     	formData.setRootPaths(commitDao.listDistinctRootPaths());
     	return formData;
     }

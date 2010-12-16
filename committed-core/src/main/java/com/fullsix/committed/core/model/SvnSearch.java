@@ -17,6 +17,7 @@ public class SvnSearch {
     public static enum Sort { ASC, DESC};
     
     String text;
+    String rootPath;
     String author;
     Date modifiedBefore;
     Date modifiedAfter;
@@ -138,6 +139,20 @@ public class SvnSearch {
      */
     public void setSortDirection(Sort sortDirection) {
         this.sortDirection = sortDirection;
+    }
+
+    /**
+     * @return the rootPath
+     */
+    public String getRootPath() {
+        return this.rootPath;
+    }
+
+    /**
+     * @param rootPath the rootPath to set
+     */
+    public void setRootPath(String rootPath) {
+        this.rootPath = rootPath;
     }
     
     

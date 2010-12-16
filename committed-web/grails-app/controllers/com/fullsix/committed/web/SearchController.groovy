@@ -12,7 +12,7 @@ class SearchController {
 		def svnSearch = new SvnSearch()
 		
 		svnSearch.setSortDirection(SvnSearch.Sort.DESC);
-    	def svnSearchFormData = svnSearcher.getFormData()
+    	def svnSearchFormData = svnSearcher.initSearchData()
 
     	render(view: '/search/index', model: [svnSearchFormData: svnSearchFormData, svnSearch : svnSearch])    
     }
@@ -21,7 +21,7 @@ class SearchController {
     
     	def svnSearch = new SvnSearch()
     	bindData(svnSearch, params, ['action'])
-    	def svnSearchFormData = svnSearcher.getFormData()
+    	def svnSearchFormData = svnSearcher.initSearchData()
     	
     	def svnSearchResult = null
     	if (svnSearch.go) {

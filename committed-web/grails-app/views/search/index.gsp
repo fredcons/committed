@@ -66,15 +66,15 @@
 	        	<table>
 	        	    <tr>
                         <td>Repository: </td>
-                        <td><g:select name="rootPath" from="${svnSearch?.rootPaths}" /> </td>
+                        <td><g:select name="rootPath" from="${svnSearchFormData?.rootPaths}" value="${svnSearch?.rootPath}" noSelection="${['':'Tous']}" /> </td>
                     </tr>	
                     <tr>
                         <td>Auteur: </td>
-                        <td><g:select name="author" from="${svnSearch?.authors}" /> </td>
+                        <td><g:select name="author" from="${svnSearchFormData?.authors}" value="${svnSearch?.author}" noSelection="${['':'Tous']}"/> </td>
                     </tr>           	
 	        		<tr>
 	        			<td>Texte libre : </td>
-	        			<td><g:textField name="text" value="${svnSearch?.text}" /> </td>
+	        			<td><g:textField name="text" value="${svnSearch?.text}"/> </td>
 	        		</tr>
 	        		<tr>
 	        			<td>Date : </td>
@@ -96,7 +96,11 @@
 	        		        	
 	        	<g:each status="i" var="commit" in="${svnSearchResult.commits}">
    						<b>${commit.revision}</b> : ${commit.comment}<br/>  			
-   						Le ${commit.formattedDate} par ${commit.author}<br/> <br/>   								
+   						Le ${commit.formattedDate} par ${commit.author} sur ${commit.repositoryPath}<br/><br/>   						
+   						<g:each status="j" var="commitItem" in="${commit.commitItems}">
+   							${commitItem.type} ${commitItem.path} <br />
+   						</g:each>
+   						<br/> <br/>   								
 				</g:each>
 	        	
 	        	<p style="text-align:center">

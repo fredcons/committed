@@ -139,7 +139,7 @@
     <properties>
         <testng.classifier>jdk15</testng.classifier>
         <springframework.version>3.0.5.RELEASE</springframework.version>
-        <morphia.version>0.98-SNAPSHOT</morphia.version>
+        <morphia.version>0.98</morphia.version>
         <mongo.version>2.3</mongo.version>
     </properties>
 </project>
