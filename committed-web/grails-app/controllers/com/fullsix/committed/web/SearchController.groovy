@@ -11,6 +11,11 @@ class SearchController {
 	def index = {
 		def svnSearch = new SvnSearch()
 		
+		svnSearch.setModifiedBefore(new Date());
+		def c = new GregorianCalendar(2000, Calendar.JANUARY, 1)
+		svnSearch.setModifiedAfter(c.time);
+		
+		
 		svnSearch.setSortDirection(SvnSearch.Sort.DESC);
     	def svnSearchFormData = svnSearcher.initSearchData()
 
