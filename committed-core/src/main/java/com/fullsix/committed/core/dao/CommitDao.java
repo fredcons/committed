@@ -36,6 +36,9 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
         if (StringUtils.hasText(search.getAuthor())) {
             query.filter("author", search.getAuthor());
         }
+        if (StringUtils.hasText(search.getRootPath())) {
+            query.filter("repositoryPath", search.getRootPath());
+        }
         if (StringUtils.hasText(search.getText())) {
             Pattern textRegexp = Pattern.compile(search.getText(), Pattern.CASE_INSENSITIVE);
             query.filter("comment", textRegexp);
