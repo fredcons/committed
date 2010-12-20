@@ -18,8 +18,10 @@ class SearchController {
 		
 		svnSearch.setSortDirection(SvnSearch.Sort.DESC);
     	def svnSearchFormData = svnSearcher.initSearchData()
+    	
+    	def svnSearchResult = svnSearcher.findLast()
 
-    	render(view: '/search/index', model: [svnSearchFormData: svnSearchFormData, svnSearch : svnSearch])    
+    	render(view: '/search/index', model: [svnSearchFormData: svnSearchFormData, svnSearchResult : svnSearchResult, svnSearch : svnSearch, firstVisit : true])    
     }
     
     def search = {

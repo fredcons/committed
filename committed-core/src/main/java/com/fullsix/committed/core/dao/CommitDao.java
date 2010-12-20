@@ -44,10 +44,10 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
             query.filter("comment", textRegexp);
         }
         if (search.getModifiedBefore() != null) {
-            query.filter("date <=", search.getModifiedBefore());
+            query.filter("date <=", search.getModifiedBeforeForSearch());
         }
         if (search.getModifiedAfter() != null) {
-            query.filter("date >=", search.getModifiedAfter());
+            query.filter("date >=", search.getModifiedAfterForSearch());
         }
         
         result.setTotalCommits(count(query));        
@@ -56,6 +56,22 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
              .limit(search.getRows());
         
         query.order("-date");
+        QueryResults<Commit> queryResult = this.find(query);
+        result.setCommits(queryResult.asList());
+        result.setQueryTime(System.currentTimeMillis() - start);
+        return result;
+    }
+    
+    public SvnSearchResult findLast() {
+        SvnSearchResult result = new SvnSearchResult();
+        long start = System.currentTimeMillis();
+                   
+        Query<Commit> query = this.createQuery();
+        query.offset(0).limit(10);
+        query.order("-date");
+        
+        result.setTotalCommits(count(query));        
+        
         QueryResults<Commit> queryResult = this.find(query);
         result.setCommits(queryResult.asList());
         result.setQueryTime(System.currentTimeMillis() - start);

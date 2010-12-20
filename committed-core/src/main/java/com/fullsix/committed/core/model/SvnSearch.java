@@ -1,5 +1,6 @@
 package com.fullsix.committed.core.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -79,6 +80,22 @@ public class SvnSearch {
     }
     
     /**
+     * @return the modifiedBefore
+     */
+    public Date getModifiedBeforeForSearch() {
+        Date result = null;
+        if (modifiedBefore != null) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(modifiedBefore);
+            cal.set(Calendar.HOUR_OF_DAY, 23);
+            cal.set(Calendar.MINUTE, 59);
+            cal.set(Calendar.SECOND, 59);
+            result = cal.getTime();
+        }
+        return result;
+    }
+    
+    /**
      * @param modifiedBefore the modifiedBefore to set
      */
     public void setModifiedBefore(Date modifiedBefore) {
@@ -90,6 +107,22 @@ public class SvnSearch {
      */
     public Date getModifiedAfter() {
         return this.modifiedAfter;
+    }
+    
+    /**
+     * @return the modifiedAfter
+     */
+    public Date getModifiedAfterForSearch() {
+        Date result = null;
+        if (modifiedAfter != null) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(modifiedAfter);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            result = cal.getTime();
+        }
+        return result;
     }
     
     /**

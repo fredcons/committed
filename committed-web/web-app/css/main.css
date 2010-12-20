@@ -131,9 +131,11 @@ td.errors input {
 }
 
 /* TABLES */
-
 table {
-    border: 1px solid #ccc;
+	cellspacing : 10px;
+}	
+
+table .main {
     width: 100%
 }
 tr {
@@ -146,6 +148,23 @@ td, th {
     text-align: left;
     vertical-align: top;
 }
+
+td.bordered {
+	border: 1px solid #ccc;
+	margin: 20px;
+	border-radius: 10px;
+	moz-border-radius: 10px;
+	webkit-border-radius: 10px;
+}
+
+td.search {
+	width: 30%;
+}
+
+td.results {
+	width: 70%
+}
+
 th {
     background: #fff url(../images/skin/shadow.jpg);
     color: #666;

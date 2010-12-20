@@ -45,8 +45,8 @@
 				font-size:1.2em;
 			}
 			#pageBody {
-				margin-left:150px;
-				margin-right:150px;
+				margin-left:50px;
+				margin-right:50px;
 			}
 		</style>
 		<script>
@@ -60,60 +60,77 @@
 		<div id="pageBody">
 	        <h1>Svn Digger</h1>
 	        
-	        <g:form name="searchForm" controller="search" action="search" method="get">
-	            <g:hiddenField name="go" value="true" />
-	            <g:hiddenField name="pageNumber" value="1" /> 
-	        	<table>
-	        	    <tr>
-                        <td>Repository: </td>
-                        <td><g:select name="rootPath" from="${svnSearchFormData?.rootPaths}" value="${svnSearch?.rootPath}" noSelection="${['':'Tous']}" /> </td>
-                    </tr>	
-                    <tr>
-                        <td>Auteur: </td>
-                        <td><g:select name="author" from="${svnSearchFormData?.authors}" value="${svnSearch?.author}" noSelection="${['':'Tous']}"/> </td>
-                    </tr>           	
-	        		<tr>
-	        			<td>Texte libre : </td>
-	        			<td><g:textField name="text" value="${svnSearch?.text}"/> </td>
-	        		</tr>
-	        		<tr>
-	        			<td>Date : </td>
-	        			<td>
-	        			Entre le <g:datePicker name="modifiedAfter" value="${svnSearch?.modifiedAfter}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/> 
-	        			et le <g:datePicker name="modifiedBefore" value="${svnSearch?.modifiedBefore}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
-	        		</tr>	        		
-	        		<tr>
-	        			<td></td>
-	        			<td><input type="submit" value="Chercher"</td>
-	        		</tr>
-	        	</table>	        
-	        </g:form>
-	        
-	        <g:if test="${svnSearchResult}">
-	        	        
-	        	Temps de recherche : ${svnSearchResult.queryTime} ms <br/>
-	        	Nombre total de docs : ${svnSearchResult.totalCommits} <br/><br/>	    
-	        		        	
-	        	<g:each status="i" var="commit" in="${svnSearchResult.commits}">
-   						<b>${commit.revision}</b> : ${commit.comment}<br/>  			
-   						Le ${commit.formattedDate} par ${commit.author} sur ${commit.repositoryPath}<br/><br/>   						
-   						<g:each status="j" var="commitItem" in="${commit.commitItems}">
-   							${commitItem.type} ${commitItem.path} <br />
-   						</g:each>
-   						<br/> <br/>   								
-				</g:each>
+	        <table class="main">
+	        	<tr>
+	        		<td class="search bordered">
+	        			<g:form name="searchForm" controller="search" action="search" method="get">
+	                    <g:hiddenField name="go" value="true" />
+	                    <g:hiddenField name="pageNumber" value="1" /> 
+	        	        <table>
+	        	    		<tr>
+                        		<td>Repository: </td>
+                        		<td><g:select name="rootPath" from="${svnSearchFormData?.rootPaths}" value="${svnSearch?.rootPath}" noSelection="${['':'Tous']}" /> </td>
+                    		</tr>	
+                    		<tr>
+                        		<td>Auteur: </td>
+                        		<td><g:select name="author" from="${svnSearchFormData?.authors}" value="${svnSearch?.author}" noSelection="${['':'Tous']}"/> </td>
+                    		</tr>           	
+	        				<tr>
+	        					<td>Texte libre : </td>
+	        					<td><g:textField name="text" value="${svnSearch?.text}"/> </td>
+	        				</tr>
+	        				<tr>
+	        					<td>Entre le : </td>
+	        					<td><g:datePicker name="modifiedAfter" value="${svnSearch?.modifiedAfter}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
+	        				</tr>	
+	        				<tr>
+	        					<td>Et le : </td>
+	        					<td><g:datePicker name="modifiedBefore" value="${svnSearch?.modifiedBefore}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
+	        				</tr>	        		
+	        				<tr>
+	        					<td></td>
+	        					<td><input type="submit" value="Chercher"</td>
+	        				</tr>
+	        			</table>	        
+	       				</g:form>
+	        		</td>
+	        		<td class="results bordered">
+	        			<g:if test="${svnSearchResult}">
 	        	
-	        	<p style="text-align:center">
-	        		<g:if test="${svnSearchResult.totalPages > 0}">
-	        			<g:each var="i" in="${(1..svnSearchResult.totalPages)}">
-							<g:if test="${i == svnSearch.pageNumber}">${i}</g:if>
-							<g:else><a href="javascript:setPageNumber(${i})">${i}</a></g:else>
-							&nbsp;
-						</g:each>
-					</g:if>
-				</p>
-				<br/><br/>
-	        </g:if>
+	        	        
+	        				Temps de recherche : ${svnSearchResult.queryTime} ms <br/>
+	        				Nombre total de docs : ${svnSearchResult.totalCommits} <br/><br/>	    
+	        		        	
+	        				<g:if test="${firstVisit}">
+	        					Les derniers commits : <br/><br/>
+	        				</g:if>
+	        	
+	        				<g:each status="i" var="commit" in="${svnSearchResult.commits}">
+   									<b>${commit.revision}</b> : ${commit.comment}<br/>  			
+   									Le ${commit.formattedDate} par ${commit.author} sur ${commit.repositoryPath}<br/><br/>   						
+   									<g:each status="j" var="commitItem" in="${commit.commitItems}">
+   										${commitItem.type} ${commitItem.path} <br />
+   									</g:each>
+   									<br/> <br/>   								
+							</g:each>
+	        	
+	        				<p style="text-align:center">
+	        					<g:if test="${svnSearchResult.totalPages > 0}">
+	        						<g:each var="i" in="${(1..svnSearchResult.totalPages)}">
+										<g:if test="${i == svnSearch.pageNumber}">${i}</g:if>
+										<g:else><a href="javascript:setPageNumber(${i})">${i}</a></g:else>
+										&nbsp;
+									</g:each>
+								</g:if>
+							</p>
+							<br/><br/>
+	       				 </g:if>
+	        		</td>
+	        	</tr>
+	        </table>
+	        
+	        
+	        
 	        
 		</div>
     </body>

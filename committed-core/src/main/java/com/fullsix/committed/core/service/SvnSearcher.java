@@ -25,6 +25,10 @@ public class SvnSearcher {
     public SvnSearchResult search(SvnSearch search) {
         return commitDao.search(search);
     }
+    
+    public SvnSearchResult findLast() {
+        return commitDao.findLast();
+    }
 
     public SvnSearchFormData initSearchData() {
     	SvnSearchFormData formData = new SvnSearchFormData();
