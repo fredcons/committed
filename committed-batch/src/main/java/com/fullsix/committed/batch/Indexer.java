@@ -83,14 +83,7 @@ public class Indexer {
     }
     
     private void execute(String[] args) {
-        Mode mode = Mode.INIT;
-        if (args != null && args.length > 0) {
-            try {
-                mode = Mode.valueOf(args[0]);
-            } catch (Exception e) {
-                LOGGER.error("Invalid mode provided : " + args[0], e);
-            }
-        }
+        
         long start = System.currentTimeMillis();
         try {
            
@@ -107,7 +100,7 @@ public class Indexer {
             
             for (Repository repository : repositories) {                
                 LOGGER.info("Indexing repo " + repository.getFullSvnUrl());                      
-                indexRevisions(repository, mode);
+                indexRevisions(repository);
             }    
                         
         } catch (SVNException svne) {
@@ -118,19 +111,27 @@ public class Indexer {
     }
         
     @SuppressWarnings("unchecked")
-    private void indexRevisions(Repository repository, Mode mode) throws SVNException {
+    private void indexRevisions(Repository repository) throws SVNException {
+        
+        LOGGER.info("Indexing repository " + repository.getFullSvnUrl());     
         
         SVNRepository svnRepository = SVNRepositoryFactory.create(SVNURL.parseURIDecoded(repository.getFullSvnUrl()));
         svnRepository.setAuthenticationManager(authManager);            
         
         long latestRev = svnRepository.getLatestRevision();
-        LOGGER.info("Latest revision for repo " + repository.getFullSvnUrl() + " is " + latestRev);           
+        LOGGER.info("Latest revision for repository " + repository.getFullSvnUrl() + " is " + latestRev);   
+        
+        Indexation currentIndexation = new Indexation();
+        currentIndexation.setRevision(latestRev);
+        currentIndexation.setDate(new Date());
+        currentIndexation.setRepository(repository.getSvnPath());
         
         long firstRev = 0;
         Indexation lastIndexation = indexationDao.findLastForPath(repository.getSvnPath());
         if (lastIndexation != null) {
             firstRev = lastIndexation.getRevision();
         }
+        LOGGER.info("Starting indexation for repository at " + firstRev);           
         
         while (latestRev >= firstRev) {
             long lowestRev = latestRev - STEP;
@@ -172,15 +173,11 @@ public class Indexer {
                 LOGGER.info("Saving commit " + commit.getRevision());    
                 commitDao.save(commit);
                 IndexerContextHolder.get().addCommit();
-            }
-            
-            Indexation currentIndexation = new Indexation();
-            currentIndexation.setRevision(latestRev);
-            currentIndexation.setDate(new Date());
-            currentIndexation.setRepository(repository.getSvnPath());
-            indexationDao.save(currentIndexation);
+            }           
             
         }    
+        
+        indexationDao.save(currentIndexation);
     }
     
     /**
