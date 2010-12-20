@@ -4,7 +4,8 @@
         <g:javascript library="less-1.0.40.min" />        
         <link rel="stylesheet" href="${resource(dir:'css',file:'grid-1140.css')}" />
         <link rel="stylesheet" href="${resource(dir:'css',file:'jquery.snippet.min.css')}" />
-        <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>       
+        <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>       
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>       
         <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
         <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
         <g:layoutHead />

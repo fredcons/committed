@@ -40,7 +40,8 @@ ul {
 input, select, textarea {
     background-color: #fcfcfc;
     border: 1px solid #ccc;
-    font: 11px verdana, arial, helvetica, sans-serif;
+    font-size: 11px;	
+	font-family: 'Arvo', serif;	
     margin: 2px 0;
     padding: 2px 4px;
 }
@@ -286,4 +287,50 @@ th.desc a {
 .buttons input.save {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
     padding-left: 28px;
+}
+
+div.title {
+	font-size: 20px;	
+	font-family: 'Arvo', serif;	
+	font-weight: bold;
+	padding: 2px 6px;
+}
+
+div.subtitle {
+	font-size: 16px;	
+	font-family: 'Arvo', serif;	
+	font-weight: bold;
+	margin: 5px 5px;
+}
+
+div.metadata {
+	font-size: 12px;	
+	font-family: 'Arvo', serif;	
+	font-weight: bold;
+	margin: 5px 5px;
+}
+
+span.formlabel {
+	font-size: 12px;	
+	font-family: 'Arvo', serif;	
+}
+
+div.resultlist {
+	font-size: 11px;	
+	margin: 5px 5px;
+	padding: 2px 6px;
+}
+
+div.commitdescription {
+	font-size: 12px;	
+	font-family: 'Arvo', serif;		
+	margin: 2px 2px;
+	padding: 2px 6px;
+}
+
+div.filepath {
+	font-size: 11px;
+	font-family: 'Inconsolata', monospace;		
+	margin: 2px 2px;
+	padding: 2px 6px;
 }

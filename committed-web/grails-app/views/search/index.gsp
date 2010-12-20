@@ -58,33 +58,33 @@
     </head>
     <body>
 		<div id="pageBody">
-	        <h1>Svn Digger</h1>
-	        
+	        <div class="title">Svn Digger</div>
 	        <table class="main">
 	        	<tr>
 	        		<td class="search bordered">
+	        			<div class="subtitle">Recherche</div>
 	        			<g:form name="searchForm" controller="search" action="search" method="get">
 	                    <g:hiddenField name="go" value="true" />
 	                    <g:hiddenField name="pageNumber" value="1" /> 
 	        	        <table>
 	        	    		<tr>
-                        		<td>Repository: </td>
+                        		<td><span class="formlabel">Repository: </span></td>
                         		<td><g:select name="rootPath" from="${svnSearchFormData?.rootPaths}" value="${svnSearch?.rootPath}" noSelection="${['':'Tous']}" /> </td>
                     		</tr>	
                     		<tr>
-                        		<td>Auteur: </td>
+                        		<td><span class="formlabel">Auteur: </span></td>
                         		<td><g:select name="author" from="${svnSearchFormData?.authors}" value="${svnSearch?.author}" noSelection="${['':'Tous']}"/> </td>
                     		</tr>           	
 	        				<tr>
-	        					<td>Texte libre : </td>
+	        					<td><span class="formlabel">Texte libre : </span></td>
 	        					<td><g:textField name="text" value="${svnSearch?.text}"/> </td>
 	        				</tr>
 	        				<tr>
-	        					<td>Entre le : </td>
+	        					<td><span class="formlabel">Entre le : </span></td>
 	        					<td><g:datePicker name="modifiedAfter" value="${svnSearch?.modifiedAfter}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
 	        				</tr>	
 	        				<tr>
-	        					<td>Et le : </td>
+	        					<td><span class="formlabel">Et le : </span></td>
 	        					<td><g:datePicker name="modifiedBefore" value="${svnSearch?.modifiedBefore}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
 	        				</tr>	        		
 	        				<tr>
@@ -95,24 +95,31 @@
 	       				</g:form>
 	        		</td>
 	        		<td class="results bordered">
+	        		    <div class="subtitle">Résultats</div>
 	        			<g:if test="${svnSearchResult}">
 	        	
-	        	        
-	        				Temps de recherche : ${svnSearchResult.queryTime} ms <br/>
-	        				Nombre total de docs : ${svnSearchResult.totalCommits} <br/><br/>	    
-	        		        	
-	        				<g:if test="${firstVisit}">
-	        					Les derniers commits : <br/><br/>
-	        				</g:if>
+	        	            <div class="metadata">        					
+	        					<g:if test="${firstVisit}">
+	        						Les derniers commits : <br/><br/>
+	        					</g:if>
+	        					<g:else>
+	        						${svnSearchResult.totalCommits} commits trouvés en ${svnSearchResult.queryTime} ms<br/><br/>	   
+	        					</g:else>
+	        		        </div>	
+	        		        
+	        		        <div class="resultlist">   				
 	        	
-	        				<g:each status="i" var="commit" in="${svnSearchResult.commits}">
-   									<b>${commit.revision}</b> : ${commit.comment}<br/>  			
-   									Le ${commit.formattedDate} par ${commit.author} sur ${commit.repositoryPath}<br/><br/>   						
+	        					<g:each status="i" var="commit" in="${svnSearchResult.commits}">
+   									<div class="commitdescription">
+   										<b>${commit.revision}</b> le ${commit.formattedDate} par ${commit.author} sur ${commit.repositoryPath} 
+   									</div>		
+   									<div class="filepath">${commit.comment}</div>
    									<g:each status="j" var="commitItem" in="${commit.commitItems}">
-   										${commitItem.type} ${commitItem.path} <br />
-   									</g:each>
-   									<br/> <br/>   								
-							</g:each>
+   										<div class="filepath">${commitItem.type} ${commitItem.path}</div>
+   									</g:each><br/>															
+								</g:each>
+							
+							</div>
 	        	
 	        				<p style="text-align:center">
 	        					<g:if test="${svnSearchResult.totalPages > 0}">
