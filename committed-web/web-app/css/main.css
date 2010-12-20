@@ -16,6 +16,12 @@ body {
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
 }
+
+#pageBody {
+    margin-left:10px;
+    margin-right:10px;
+}
+
 #grailsLogo {
 	padding:20px;
 }
@@ -61,40 +67,6 @@ input:focus, select:focus, textarea:focus {
 .body {
     float: left;
     margin: 0 15px 10px 15px;
-}
-
-/* NAVIGATION MENU */
-
-.nav {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-style: solid none solid none;
-    margin-top: 5px;
-    padding: 7px 12px;
-}
-
-.menuButton {
-    font-size: 10px;
-    padding: 0 5px;
-}
-.menuButton a {
-    color: #333;
-    padding: 4px 6px;
-}
-.menuButton a.home {
-    background: url(../images/skin/house.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.list {
-    background: url(../images/skin/database_table.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.create {
-    background: url(../images/skin/database_add.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
 }
 
 /* MESSAGES AND ERRORS */
@@ -167,93 +139,6 @@ td.results {
 	width: 100%
 }
 
-th {
-    background: #fff url(../images/skin/shadow.jpg);
-    color: #666;
-    font-size: 11px;
-    font-weight: bold;
-    line-height: 17px;
-    padding: 2px 6px;
-}
-th a:link, th a:visited, th a:hover {
-    color: #333;
-    display: block;
-    font-size: 10px;
-    text-decoration: none;
-    width: 100%;
-}
-th.asc a, th.desc a {
-    background-position: right;
-    background-repeat: no-repeat;
-}
-th.asc a {
-    background-image: url(../images/skin/sorted_asc.gif);
-}
-th.desc a {
-    background-image: url(../images/skin/sorted_desc.gif);
-}
-
-.odd {
-    background: #f7f7f7;
-}
-.even {
-    background: #fff;
-}
-
-/* LIST */
-
-.list table {
-    border-collapse: collapse;
-}
-.list th, .list td {
-    border-left: 1px solid #ddd;
-}
-.list th:hover, .list tr:hover {
-    background: #b2d1ff;
-}
-
-/* PAGINATION */
-
-.paginateButtons {
-    background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
-    border: 1px solid #ccc;
-    border-top: 0;
-    color: #666;
-    font-size: 10px;
-    overflow: hidden;
-    padding: 10px 3px;
-}
-.paginateButtons a {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-color: #ccc #aaa #aaa #ccc;
-    color: #666;
-    margin: 0 3px;
-    padding: 2px 6px;
-}
-.paginateButtons span {
-    padding: 2px 3px;
-}
-
-/* DIALOG */
-
-.dialog table {
-    padding: 5px 0;
-}
-
-.prop {
-    padding: 5px;
-}
-.prop .name {
-    text-align: left;
-    width: 15%;
-    white-space: nowrap;
-}
-.prop .value {
-    text-align: left;
-    width: 85%;
-}
-
 /* ACTION BUTTONS */
 
 .buttons {
@@ -291,7 +176,7 @@ th.desc a {
 }
 
 div.title {
-	font-size: 20px;	
+	font-size: 24px;	
 	font-family: 'Arvo', serif;	
 	font-weight: bold;
 	padding: 2px 6px;
@@ -299,14 +184,14 @@ div.title {
 }
 
 div.subtitle {
-	font-size: 16px;	
+	font-size: 20px;	
 	font-family: 'Arvo', serif;	
 	font-weight: bold;
 	margin: 5px 0px 15px 5px;
 }
 
 div.metadata {
-	font-size: 12px;	
+	font-size: 13px;	
 	font-family: 'Arvo', serif;	
 	font-weight: bold;
 	margin: 5px 5px;
@@ -317,21 +202,15 @@ span.formlabel {
 	font-family: 'Arvo', serif;	
 }
 
-div.resultlist {
-	font-size: 11px;	
-	margin: 5px 5px;
-	padding: 2px 6px;
-}
-
 div.commitdescription {
-	font-size: 12px;	
+	font-size: 13px;	
 	font-family: 'Arvo', serif;		
 	margin: 2px 2px;
 	padding: 2px 6px;
 }
 
 div.filepath {
-	font-size: 11px;
+	font-size: 12px;
 	font-family: 'Inconsolata', monospace;		
 	margin: 2px 2px;
 	padding: 2px 6px;
@@ -349,3 +228,18 @@ td.formlabel {
 td.formfield {
 	white-space: nowrap;
 }	
+
+div.pagination {
+    font-size: 12px;    
+    font-family: 'Arvo', serif; 
+    white-space: nowrap;
+    text-align:center;    
+}
+
+div.pagination a {
+    border: 1px solid #ccc;
+    padding: 2px;
+    border-radius: 2px;
+    moz-border-radius: 2px;
+    webkit-border-radius: 2px;   
+} 
