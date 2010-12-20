@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class SvnSearch {
     
-    public static final int DEFAULT_ROWS = 10;
+    public static final int DEFAULT_ROWS = 20;
     
     public static enum Sort { ASC, DESC};
     

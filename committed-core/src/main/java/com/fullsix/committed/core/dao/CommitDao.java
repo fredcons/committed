@@ -67,7 +67,7 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
         long start = System.currentTimeMillis();
                    
         Query<Commit> query = this.createQuery();
-        query.offset(0).limit(10);
+        query.offset(0).limit(SvnSearch.DEFAULT_ROWS);
         query.order("-date");
         
         result.setTotalCommits(count(query));        

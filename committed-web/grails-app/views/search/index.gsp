@@ -45,8 +45,8 @@
 				font-size:1.2em;
 			}
 			#pageBody {
-				margin-left:50px;
-				margin-right:50px;
+				margin-left:10px;
+				margin-right:10px;
 			}
 		</style>
 		<script>
@@ -68,28 +68,28 @@
 	                    <g:hiddenField name="pageNumber" value="1" /> 
 	        	        <table>
 	        	    		<tr>
-                        		<td><span class="formlabel">Repository: </span></td>
-                        		<td><g:select name="rootPath" from="${svnSearchFormData?.rootPaths}" value="${svnSearch?.rootPath}" noSelection="${['':'Tous']}" /> </td>
+                        		<td class="formlabel">Repository : </td>
+                        		<td class="formfield"><g:select name="rootPath" from="${svnSearchFormData?.rootPaths}" value="${svnSearch?.rootPath}" noSelection="${['':'Tous']}" /> </td>
                     		</tr>	
                     		<tr>
-                        		<td><span class="formlabel">Auteur: </span></td>
-                        		<td><g:select name="author" from="${svnSearchFormData?.authors}" value="${svnSearch?.author}" noSelection="${['':'Tous']}"/> </td>
+                        		<td class="formlabel">Auteur : </td>
+                        		<td class="formfield"><g:select name="author" from="${svnSearchFormData?.authors}" value="${svnSearch?.author}" noSelection="${['':'Tous']}"/> </td>
                     		</tr>           	
 	        				<tr>
-	        					<td><span class="formlabel">Texte libre : </span></td>
-	        					<td><g:textField name="text" value="${svnSearch?.text}"/> </td>
+	        					<td class="formlabel">Texte libre : </td>
+	        					<td class="formfield"><g:textField name="text" value="${svnSearch?.text}"/> </td>
 	        				</tr>
 	        				<tr>
-	        					<td><span class="formlabel">Entre le : </span></td>
-	        					<td><g:datePicker name="modifiedAfter" value="${svnSearch?.modifiedAfter}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
+	        					<td class="formlabel">Entre le : </td>
+	        					<td class="formfield"><g:datePicker name="modifiedAfter" value="${svnSearch?.modifiedAfter}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
 	        				</tr>	
 	        				<tr>
-	        					<td><span class="formlabel">Et le : </span></td>
-	        					<td><g:datePicker name="modifiedBefore" value="${svnSearch?.modifiedBefore}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
+	        					<td class="formlabel">Et le : </td>
+	        					<td class="formfield"><g:datePicker name="modifiedBefore" value="${svnSearch?.modifiedBefore}" precision="day" years="${2015..2000}" noSelection="['':'Choisir...']"/></td>
 	        				</tr>	        		
 	        				<tr>
-	        					<td></td>
-	        					<td><input type="submit" value="Chercher"</td>
+	        					<td class="formlabel"></td>
+	        					<td class="formfield"><input type="submit" value="Chercher"</td>
 	        				</tr>
 	        			</table>	        
 	       				</g:form>
@@ -121,6 +121,7 @@
 							
 							</div>
 	        	
+	        	            <g:if test="${!firstVisit}"> 
 	        				<p style="text-align:center">
 	        					<g:if test="${svnSearchResult.totalPages > 0}">
 	        						<g:each var="i" in="${(1..svnSearchResult.totalPages)}">
@@ -131,6 +132,7 @@
 								</g:if>
 							</p>
 							<br/><br/>
+							</g:if>
 	       				 </g:if>
 	        		</td>
 	        	</tr>
