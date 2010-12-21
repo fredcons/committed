@@ -154,6 +154,38 @@ public class CommitDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(distinctFilePaths.contains("/baz"), "/baz should be there");        
                 
     }
+    
+    @Test
+    public void findByPath() {
+        long initialCount = commitDao.count();
+        Assert.assertEquals(initialCount, 0, "Collection should be empty");
+        Commit commit = new Commit();
+        commit.setComment("whatever");
+        CommitItem item = new CommitItem();
+        item.setPath("/foo/bar");
+        commit.addCommitItem(item);
+        commitDao.save(commit);
+        long finalCount = commitDao.count();
+        Assert.assertEquals(finalCount, 1, "One commit should be present");
+        
+        SvnSearch search = new SvnSearch();
+        
+        search.setFilePath("/foo");
+        SvnSearchResult result = commitDao.search(search);
+        LOGGER.info("Found " + result.getTotalCommits() + " for search " + search.getFilePath());
+        Assert.assertEquals(result.getTotalCommits(), 1, "/foo should match /foo/bar");
+        
+        search.setFilePath("/bar");
+        result = commitDao.search(search);
+        LOGGER.info("Found " + result.getTotalCommits() + " for search " + search.getFilePath());
+        Assert.assertEquals(result.getTotalCommits(), 1, "/bar should match /foo/bar");
+        
+        search.setFilePath("/baz");
+        result = commitDao.search(search);
+        LOGGER.info("Found " + result.getTotalCommits() + " for search " + search.getFilePath());
+        Assert.assertEquals(result.getTotalCommits(), 0, "/baz should not match /foo/bar");
+        
+    }
 
     
 

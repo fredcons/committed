@@ -19,6 +19,7 @@ public class SvnSearch {
     
     String text;
     String rootPath;
+    String filePath;
     String author;
     Date modifiedBefore;
     Date modifiedAfter;
@@ -186,6 +187,20 @@ public class SvnSearch {
      */
     public void setRootPath(String rootPath) {
         this.rootPath = rootPath;
+    }
+
+    /**
+     * @return the filePath
+     */
+    public String getFilePath() {
+        return this.filePath;
+    }
+
+    /**
+     * @param filePath the filePath to set
+     */
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
     
     

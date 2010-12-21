@@ -32,8 +32,12 @@
                         		<td class="formfield"><g:select name="author" from="${svnSearchFormData?.authors}" value="${svnSearch?.author}" noSelection="${['':'Tous']}"/> </td>
                     		</tr>           	
 	        				<tr>
-	        					<td class="formlabel">Texte libre : </td>
-	        					<td class="formfield"><g:textField name="text" value="${svnSearch?.text}"/> </td>
+	        					<td class="formlabel">Commentaire : </td>
+	        					<td class="formfield"><g:textField name="text" class="largefield" placeholder="Ex : RENAULT-2000, c2g" value="${svnSearch?.text}" /> </td>
+	        				</tr>
+	        				<tr>
+	        					<td class="formlabel">Chemin de fichier : </td>
+	        					<td class="formfield"><g:textField name="filePath" class="largefield" placeholder="Ex : configurator, pom.xml" value="${svnSearch?.filePath}"/> </td>
 	        				</tr>
 	        				<tr>
 	        					<td class="formlabel">Entre le : </td>

@@ -49,6 +49,10 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
         if (search.getModifiedAfter() != null) {
             query.filter("date >=", search.getModifiedAfterForSearch());
         }
+        if (search.getFilePath() != null) {
+            Pattern pathRegexp = Pattern.compile(search.getFilePath(), Pattern.CASE_INSENSITIVE);
+            query.filter("commitItems.path", pathRegexp);
+        }
         
         result.setTotalCommits(count(query));        
            
