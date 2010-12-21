@@ -18,7 +18,6 @@ public class SvnSearcher {
     
     private static final Logger LOGGER = Logger.getLogger(SvnSearcher.class);
     
-    //private SvnConfiguration svnConfiguration;
     private CommitDao commitDao;
     
     
@@ -33,7 +32,6 @@ public class SvnSearcher {
     public SvnSearchFormData initSearchData() {
     	SvnSearchFormData formData = new SvnSearchFormData();
     	formData.setAuthors(commitDao.listDistinctAuthors());
-    	//formData.setFilePaths(commitDao.listDistinctFilePaths());
     	formData.setRootPaths(commitDao.listDistinctRootPaths());
     	return formData;
     }
@@ -45,15 +43,4 @@ public class SvnSearcher {
         this.commitDao = commitDao;
     }
     
-    /**
-     * @param svnConfiguration the svnConfiguration to set
-     */
-    /**
-    public void setSvnConfiguration(SvnConfiguration svnConfiguration) {
-        this.svnConfiguration = svnConfiguration;
-    }
-    */
-
-    
-
 }

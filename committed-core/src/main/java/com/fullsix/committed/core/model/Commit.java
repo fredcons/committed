@@ -38,12 +38,7 @@ public class Commit {
     
     @Embedded
     List<CommitItem> commitItems;
-    
-    /*
-    @Embedded
-    List<CommitProperty> commitProperties;
-    */
-    
+        
     /**
      * @return the id
      */
@@ -135,23 +130,6 @@ public class Commit {
     public void setCommitItems(List<CommitItem> commitItems) {
         this.commitItems = commitItems;
     }
-
-    /**
-     * @return the properties
-     */
-    /*
-    public List<CommitProperty> getCommitProperties() {
-        return this.commitProperties;
-    }
-    */
-    /*
-    public void addCommitProperty(CommitProperty property) {
-        if (commitProperties == null) {
-            commitProperties = new ArrayList<CommitProperty>();            
-        }
-        commitProperties.add(property);
-    }
-    */
     
     public void addCommitItem(CommitItem file) {
         if (commitItems == null) {
@@ -174,15 +152,5 @@ public class Commit {
         this.repositoryPath = repositoryPath;
     }
 
-    /**
-     * @param properties the properties to set
-     */
-    /*
-    public void setCommitProperties(List<CommitProperty> commitProperties) {
-        this.commitProperties = commitProperties;
-    }
-    */
-    
-    
     
 }
