@@ -51,6 +51,10 @@
         </bean>
         <bean class="com.fullsix.committed.core.model.Repository">
             <property name="svnUrl" value="${svn.url}" />
+            <property name="svnPath" value="/sncf2" />
+        </bean>
+        <bean class="com.fullsix.committed.core.model.Repository">
+            <property name="svnUrl" value="${svn.url}" />
             <property name="svnPath" value="/" />
         </bean>
     </util:list>

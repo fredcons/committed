@@ -3,8 +3,7 @@ beans = {
 
   svnConfiguration(com.fullsix.committed.core.model.SvnConfiguration) {
   	svnUrl = "http://subversion.fullsix.com"
-  	svnUsername = "hudson"
-  	svnPassword = "if7Zaisi"
+  	viewSvnUrl = "http://viewsvn.fullsix.com/viewvc"
   }
    
   

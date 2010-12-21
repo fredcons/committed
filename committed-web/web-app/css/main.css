@@ -237,11 +237,12 @@ div.pagination {
     font-family: 'Arvo', serif; 
     white-space: nowrap;
     text-align:center;    
+    margin: 15px 0 15px 0;
 }
 
 div.pagination a {
     border: 1px solid #ccc;
-    padding: 2px;
+    padding: 2px;    
     border-radius: 2px;
     moz-border-radius: 2px;
     webkit-border-radius: 2px;   

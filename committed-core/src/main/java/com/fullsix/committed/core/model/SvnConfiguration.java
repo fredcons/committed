@@ -17,25 +17,14 @@ public class SvnConfiguration {
     private static final Logger LOGGER = Logger.getLogger(SvnConfiguration.class);
         
     protected String svnUrl;
-    //protected String svnPath;
+    protected String viewSvnUrl;
     protected String svnUsername;
     protected String svnPassword;
-    
-    /*
-    protected List<String> prefixWhiteList;
-    protected List<String> extensionsWhiteList;
-    */
-    
+        
     @PostConstruct
     public void dump() {
         LOGGER.info("Using svn configuration : ");
-        //LOGGER.info("  svn url    : " + svnUrl);
-        //LOGGER.info("  svn path    : " + svnPath);
-        LOGGER.info("  svn user    : " + svnUsername);
-        /*
-        LOGGER.info("  prefixes    : " + StringUtils.collectionToCommaDelimitedString(prefixWhiteList));
-        LOGGER.info("  extensions  : " + StringUtils.collectionToCommaDelimitedString(extensionsWhiteList));
-        */
+        LOGGER.info("  svn url    : " + svnUrl);
     }
     
     /**
@@ -46,33 +35,12 @@ public class SvnConfiguration {
     }
     
     /**
-     * @return the full svnUrl
-     */
-//    public String getFullSvnUrl() {
-//        return this.svnUrl + this.svnPath;
-//    }
-    
-    /**
      * @param svnUrl the svnUrl to set
      */
     public void setSvnUrl(String svnUrl) {
         this.svnUrl = svnUrl;
     }
-    
-    /**
-     * @return the svnPath
-     */
-//    public String getSvnPath() {
-//        return this.svnPath;
-//    }
-    
-    /**
-     * @param svnPath the svnPath to set
-     */
-//    public void setSvnPath(String svnPath) {
-//        this.svnPath = svnPath;
-//    }
-    
+   
     /**
      * @return the svnUsername
      */
@@ -99,6 +67,20 @@ public class SvnConfiguration {
      */
     public void setSvnPassword(String svnPassword) {
         this.svnPassword = svnPassword;
+    }
+
+    /**
+     * @return the viewSvnUrl
+     */
+    public String getViewSvnUrl() {
+        return this.viewSvnUrl;
+    }
+
+    /**
+     * @param viewSvnUrl the viewSvnUrl to set
+     */
+    public void setViewSvnUrl(String viewSvnUrl) {
+        this.viewSvnUrl = viewSvnUrl;
     }
     
 

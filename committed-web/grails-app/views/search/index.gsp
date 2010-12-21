@@ -82,34 +82,30 @@
 							</div>
 	        	
 	        	            <g:if test="${!firstVisit}"> 
-	        				<div class="pagination">
-	        					<g:if test="${svnSearchResult.totalPages > 0}">
-	        					    <g:set var="paginationEllipseBefore" value="${false}" />
-	        					    <g:set var="paginationEllipseAfter" value="${false}" />
-	        						<g:each var="i" in="${(1..svnSearchResult.totalPages)}">
-										<g:if test="${i == svnSearch.pageNumber}">${i}&nbsp;</g:if>
-										<g:elseif test="${(i > svnSearch.pageNumber && i < svnSearch.pageNumber + 5) || (i < svnSearch.pageNumber && i > svnSearch.pageNumber - 5)}"><a href="javascript:setPageNumber(${i})">${i}</a>&nbsp;</g:elseif>
-										<g:elseif test="${i == 1 || i == svnSearchResult.totalPages}"><a href="javascript:setPageNumber(${i})">${i}</a>&nbsp;</g:elseif>
-										<g:elseif test="${i > 1 && i < svnSearch.pageNumber && paginationEllipseBefore == false}">
-										  ...
-										  <g:set var="paginationEllipseBefore" value="${true}" />
-										</g:elseif>
-										<g:elseif test="${i > svnSearch.pageNumber && i < svnSearchResult.totalPages && paginationEllipseAfter == false}">
-                                          ...
-                                          <g:set var="paginationEllipseAfter" value="${true}" />
-                                        </g:elseif>
-									</g:each>
-								</g:if>
-							</div>
-							<br/><br/>
+	        					<div class="pagination">
+	        						<g:if test="${svnSearchResult.totalPages > 0}">
+	        					    	<g:set var="paginationEllipseBefore" value="${false}" />
+	        					    	<g:set var="paginationEllipseAfter" value="${false}" />
+	        							<g:each var="i" in="${(1..svnSearchResult.totalPages)}">
+											<g:if test="${i == svnSearch.pageNumber}">${i}&nbsp;</g:if>
+											<g:elseif test="${(i > svnSearch.pageNumber && i < svnSearch.pageNumber + 5) || (i < svnSearch.pageNumber && i > svnSearch.pageNumber - 5)}"><a href="javascript:setPageNumber(${i})">${i}</a>&nbsp;</g:elseif>
+											<g:elseif test="${i == 1 || i == svnSearchResult.totalPages}"><a href="javascript:setPageNumber(${i})">${i}</a>&nbsp;</g:elseif>
+											<g:elseif test="${i > 1 && i < svnSearch.pageNumber && paginationEllipseBefore == false}">
+											  ...
+											  <g:set var="paginationEllipseBefore" value="${true}" />
+											</g:elseif>
+											<g:elseif test="${i > svnSearch.pageNumber && i < svnSearchResult.totalPages && paginationEllipseAfter == false}">
+                                     	     ...
+                                     	     <g:set var="paginationEllipseAfter" value="${true}" />
+                                     	   </g:elseif>
+										</g:each>
+									</g:if>
+								</div>
 							</g:if>
 	       				 </g:if>
 	        		</td>
 	        	</tr>
 	        </table>
-	        
-	        
-	        
 	        
 		</div>
     </body>
