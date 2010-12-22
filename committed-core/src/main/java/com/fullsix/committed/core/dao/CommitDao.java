@@ -1,18 +1,27 @@
 package com.fullsix.committed.core.dao;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.util.StringUtils;
 
 import com.fullsix.committed.core.model.Commit;
+import com.fullsix.committed.core.model.StatsSearch;
+import com.fullsix.committed.core.model.StatsSearchResult;
 import com.fullsix.committed.core.model.SvnSearch;
 import com.fullsix.committed.core.model.SvnSearchResult;
+import com.fullsix.committed.core.model.stats.Aggregation;
+import com.fullsix.committed.core.model.stats.DateAggregation;
+import com.fullsix.committed.core.model.stats.HourAggregation;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.dao.BasicDAO;
 import com.google.code.morphia.query.Query;
 import com.google.code.morphia.query.QueryResults;
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 
 /**
@@ -26,6 +35,7 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
     
     public CommitDao(Mongo mongo, Morphia morphia, String dbName) {
         super(Commit.class, mongo, morphia, dbName);
+        ensureIndexes();
     }   
     
     public SvnSearchResult search(SvnSearch search) {
@@ -79,6 +89,74 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
         QueryResults<Commit> queryResult = this.find(query);
         result.setCommits(queryResult.asList());
         result.setQueryTime(System.currentTimeMillis() - start);
+        return result;
+    }
+    
+    public StatsSearchResult findStats(StatsSearch search) {
+        
+        StatsSearchResult statsSearchResult = new StatsSearchResult();
+        long start = System.currentTimeMillis();
+        
+        BasicDBList result = findStatsByKey(Aggregation.DATE_KEY, search);
+        System.out.println("by date : " + result.toString());
+        for (Iterator<Object> it = result.iterator(); it.hasNext();) {
+            BasicDBObject dbObject = (BasicDBObject) it.next();
+            Aggregation dateAggregation = new Aggregation();
+            dateAggregation.setAuthor(dbObject.getString("author"));
+            dateAggregation.setRepositoryPath(dbObject.getString("repositoryPath"));
+            dateAggregation.setCount(dbObject.getInt("count"));
+            dateAggregation.setKey(dbObject.getString(Aggregation.DATE_KEY));
+            statsSearchResult.getDateAggregations().add(dateAggregation);
+        }
+        
+        result = findStatsByKey(Aggregation.HOUR_KEY, search);
+        System.out.println("by hour : " + result.toString());
+        for (Iterator<Object> it = result.iterator(); it.hasNext();) {
+            BasicDBObject dbObject = (BasicDBObject) it.next();
+            Aggregation hourAggregation = new Aggregation();
+            hourAggregation.setAuthor(dbObject.getString("author"));
+            hourAggregation.setRepositoryPath(dbObject.getString("repositoryPath"));
+            hourAggregation.setCount(dbObject.getInt("count"));
+            hourAggregation.setKey(dbObject.getString(Aggregation.HOUR_KEY));
+            statsSearchResult.getHourAggregations().add(hourAggregation);
+        }
+        
+        statsSearchResult.setQueryTime(System.currentTimeMillis() - start);
+        return statsSearchResult;
+                
+    }
+    
+    private BasicDBList findStatsByKey(String keyAsString, StatsSearch search) {
+        DBObject key = new BasicDBObject();
+        key.put(keyAsString, true);
+        
+        if (!StringUtils.hasText(search.getAuthor())) {
+            key.put("author", true);
+        }
+        if (!StringUtils.hasText(search.getRootPath())) {
+            key.put("repositoryPath", true);
+        }
+          
+        DBObject condition = new BasicDBObject();
+        if (StringUtils.hasText(search.getAuthor())) {
+            condition.put("author", search.getAuthor());
+        }
+        if (StringUtils.hasText(search.getRootPath())) {
+            condition.put("repositoryPath", search.getRootPath());
+        }
+        if (search.getModifiedBefore() != null) {
+            condition.put("date", new BasicDBObject("$lte", search.getModifiedBeforeForSearch()));
+        }
+        if (search.getModifiedAfter() != null) {
+            condition.put("date", new BasicDBObject("$gte", search.getModifiedAfterForSearch()));
+        }
+        
+        DBObject initial = new BasicDBObject();
+        initial.put("count", 0);
+        
+        String reduce = "function(obj,prev){prev.count++}";
+        
+        BasicDBList result = (BasicDBList) this.getCollection().group(key, condition, initial, reduce);      
         return result;
     }
     

@@ -1,5 +1,9 @@
 package com.fullsix.committed.core.test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -13,6 +17,7 @@ import org.testng.annotations.Test;
 import com.fullsix.committed.core.dao.CommitDao;
 import com.fullsix.committed.core.model.Commit;
 import com.fullsix.committed.core.model.CommitItem;
+import com.fullsix.committed.core.model.StatsSearch;
 import com.fullsix.committed.core.model.SvnSearch;
 import com.fullsix.committed.core.model.SvnSearchResult;
 
@@ -184,6 +189,49 @@ public class CommitDaoTest extends AbstractTestNGSpringContextTests {
         result = commitDao.search(search);
         LOGGER.info("Found " + result.getTotalCommits() + " for search " + search.getFilePath());
         Assert.assertEquals(result.getTotalCommits(), 0, "/baz should not match /foo/bar");
+        
+    }
+    
+    @Test
+    public void findStats() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        
+        Calendar cal = Calendar.getInstance();
+        
+        Date d1 = new Date();
+        
+        Commit commit1 = new Commit();
+        commit1.setAuthor("fred");
+        commit1.setRepositoryPath("/blah");
+        commit1.setDate(d1);
+        commitDao.save(commit1);
+        
+        Commit commit2 = new Commit();
+        commit2.setAuthor("fred");
+        commit2.setRepositoryPath("/bleh");
+        commit2.setDate(d1);
+        commitDao.save(commit2);
+        
+        Date d2 = new Date();
+        
+        Commit commit3 = new Commit();
+        commit3.setAuthor("fred");
+        commit3.setRepositoryPath("/bleh");
+        commit3.setDate(d2);
+        commitDao.save(commit3);
+        
+        Commit commit4 = new Commit();
+        commit4.setAuthor("fred");
+        commit4.setRepositoryPath("/bleh");
+        commit4.setDate(d2);
+        commitDao.save(commit4);
+        
+        StatsSearch search = new StatsSearch();
+        search.setAuthor("fred");
+        commitDao.findStats(search);        
+        
+        search.setRootPath("/bleh");
+        commitDao.findStats(search);        
         
     }
 

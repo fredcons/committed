@@ -213,7 +213,7 @@ span.formlabel {
 div.commitdescription {
 	font-size: 13px;	
 	font-family: @main_font_family;		
-	margin: 2px 2px;
+	margin: 2px 2px 5px 2px;
 	padding: 2px 6px;
 }
 

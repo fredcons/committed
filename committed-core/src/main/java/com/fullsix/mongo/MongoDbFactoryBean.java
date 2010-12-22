@@ -24,7 +24,7 @@ public class MongoDbFactoryBean implements FactoryBean<Mongo> {
     
     private static final Logger LOGGER = Logger.getLogger(MongoDbFactoryBean.class);
     
-    private static final int DEFAULT_TIMEOUT = 15000;
+    private static final int DEFAULT_TIMEOUT = 60000;
     
     private Mongo mongo;
     private String host;

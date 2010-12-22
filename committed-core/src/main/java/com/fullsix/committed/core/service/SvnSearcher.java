@@ -3,6 +3,8 @@ package com.fullsix.committed.core.service;
 import org.apache.log4j.Logger;
 
 import com.fullsix.committed.core.dao.CommitDao;
+import com.fullsix.committed.core.model.StatsSearch;
+import com.fullsix.committed.core.model.StatsSearchResult;
 import com.fullsix.committed.core.model.SvnSearch;
 import com.fullsix.committed.core.model.SvnSearchFormData;
 import com.fullsix.committed.core.model.SvnSearchResult;
@@ -18,8 +20,7 @@ public class SvnSearcher {
     
     private static final Logger LOGGER = Logger.getLogger(SvnSearcher.class);
     
-    private CommitDao commitDao;
-    
+    private CommitDao commitDao;    
     
     public SvnSearchResult search(SvnSearch search) {
         return commitDao.search(search);
@@ -30,10 +31,16 @@ public class SvnSearcher {
     }
 
     public SvnSearchFormData initSearchData() {
+        long start = System.currentTimeMillis();
     	SvnSearchFormData formData = new SvnSearchFormData();
     	formData.setAuthors(commitDao.listDistinctAuthors());
     	formData.setRootPaths(commitDao.listDistinctRootPaths());
+    	LOGGER.info("form data initialized in " + (System.currentTimeMillis() - start) +  " ms");
     	return formData;
+    }
+    
+    public StatsSearchResult findStats(StatsSearch search) {
+        return commitDao.findStats(search);
     }
 
     /**

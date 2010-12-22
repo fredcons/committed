@@ -24,6 +24,7 @@ public class IndexationDao extends BasicDAO<Indexation, Serializable> {
     
     public IndexationDao(Mongo mongo, Morphia morphia, String dbName) {
         super(Indexation.class, mongo, morphia, dbName);
+        ensureIndexes();
     }   
     
     public Indexation findLastForPath(String path) {

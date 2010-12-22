@@ -10,6 +10,7 @@ import com.google.code.morphia.annotations.Embedded;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 import com.google.code.morphia.annotations.Indexed;
+import com.google.code.morphia.utils.IndexDirection;
 
 /**
  * Committed
@@ -23,6 +24,10 @@ public class Commit {
     
     private static final String DISPLAY_DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
     
+    private static final String GROUP_DATE_FORMAT = "dd/MM/yyyy";
+    
+    private static final String GROUP_HOUR_FORMAT = "HH";
+    
     @Id 
     String id;
     @Indexed
@@ -31,8 +36,12 @@ public class Commit {
     String comment;
     @Indexed
     String author;
-    @Indexed
+    @Indexed(value=IndexDirection.DESC)
     Date date;
+    @Indexed
+    String groupDate;
+    @Indexed
+    String groupHour;
     @Indexed
     String repositoryPath;
     
@@ -115,6 +124,10 @@ public class Commit {
      */
     public void setDate(Date date) {
         this.date = date;
+        DateFormat df = new SimpleDateFormat(GROUP_DATE_FORMAT);
+        this.groupDate = df.format(date);
+        DateFormat hf = new SimpleDateFormat(GROUP_HOUR_FORMAT);
+        this.groupHour = hf.format(date);
     }
 
     /**
@@ -150,6 +163,20 @@ public class Commit {
      */
     public void setRepositoryPath(String repositoryPath) {
         this.repositoryPath = repositoryPath;
+    }
+
+    /**
+     * @return the groupDate
+     */
+    public String getGroupDate() {
+        return this.groupDate;
+    }
+
+    /**
+     * @return the groupHour
+     */
+    public String getGroupHour() {
+        return this.groupHour;
     }
 
     

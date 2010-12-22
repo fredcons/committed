@@ -54,11 +54,7 @@ public class Indexer {
     private CommitDao commitDao;
     
     private IndexationDao indexationDao;
-    
-    private static enum Mode {
-        INIT, DELTA
-    }
-    
+        
     @SuppressWarnings("unchecked")
     public static void main(String[] args) throws Exception {
         Indexer indexer = new Indexer();
@@ -126,14 +122,14 @@ public class Indexer {
         currentIndexation.setDate(new Date());
         currentIndexation.setRepository(repository.getSvnPath());
         
-        long firstRev = 0;
+        long firstRev = 1;
         Indexation lastIndexation = indexationDao.findLastForPath(repository.getSvnPath());
         if (lastIndexation != null) {
             firstRev = lastIndexation.getRevision();
         }
         LOGGER.info("Starting indexation for repository at " + firstRev);           
         
-        while (latestRev >= firstRev) {
+        while (latestRev > firstRev) {
             long lowestRev = latestRev - STEP;
             LOGGER.info("Indexing from " + lowestRev + " to " + latestRev);           
             Collection logEntries = svnRepository.log( new String[] {""}, null, lowestRev > firstRev ? lowestRev : firstRev, latestRev, true, true);
