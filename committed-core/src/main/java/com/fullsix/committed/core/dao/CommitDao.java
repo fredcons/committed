@@ -1,6 +1,7 @@
 package com.fullsix.committed.core.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -95,36 +96,18 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
         StatsSearchResult statsSearchResult = new StatsSearchResult();
         long start = System.currentTimeMillis();
         
-        BasicDBList result = findStatsByKey(Aggregation.DATE_KEY, search);
-        System.out.println("by date : " + result.toString());
-        for (Iterator<Object> it = result.iterator(); it.hasNext();) {
-            BasicDBObject dbObject = (BasicDBObject) it.next();
-            Aggregation dateAggregation = new Aggregation();
-            dateAggregation.setAuthor(dbObject.getString("author"));
-            dateAggregation.setRepositoryPath(dbObject.getString("repositoryPath"));
-            dateAggregation.setCount(dbObject.getInt("count"));
-            dateAggregation.setKey(dbObject.getString(Aggregation.DATE_KEY));
-            statsSearchResult.getDateAggregations().add(dateAggregation);
-        }
+        List<Aggregation> dateAggregations = findStatsByKey(Aggregation.DATE_KEY, search);
+        statsSearchResult.setDateAggregations(dateAggregations);
         
-        result = findStatsByKey(Aggregation.HOUR_KEY, search);
-        System.out.println("by hour : " + result.toString());
-        for (Iterator<Object> it = result.iterator(); it.hasNext();) {
-            BasicDBObject dbObject = (BasicDBObject) it.next();
-            Aggregation hourAggregation = new Aggregation();
-            hourAggregation.setAuthor(dbObject.getString("author"));
-            hourAggregation.setRepositoryPath(dbObject.getString("repositoryPath"));
-            hourAggregation.setCount(dbObject.getInt("count"));
-            hourAggregation.setKey(dbObject.getString(Aggregation.HOUR_KEY));
-            statsSearchResult.getHourAggregations().add(hourAggregation);
-        }
-        
+        List<Aggregation> hourAggregations = findStatsByKey(Aggregation.HOUR_KEY, search);
+        statsSearchResult.setHourAggregations(hourAggregations);
+                
         statsSearchResult.setQueryTime(System.currentTimeMillis() - start);
         return statsSearchResult;
                 
     }
     
-    private BasicDBList findStatsByKey(String keyAsString, StatsSearch search) {
+    private List<Aggregation> findStatsByKey(String keyAsString, StatsSearch search) {
         DBObject key = new BasicDBObject();
         key.put(keyAsString, true);
         
@@ -154,8 +137,18 @@ public class CommitDao extends BasicDAO<Commit, Serializable> {
         
         String reduce = "function(obj,prev){prev.count++}";
         
-        BasicDBList result = (BasicDBList) this.getCollection().group(key, condition, initial, reduce);      
-        return result;
+        BasicDBList resultObject = (BasicDBList) this.getCollection().group(key, condition, initial, reduce);     
+        List<Aggregation> aggregations = new ArrayList<Aggregation>();
+        for (Iterator<Object> it = resultObject.iterator(); it.hasNext();) {
+            BasicDBObject dbObject = (BasicDBObject) it.next();
+            Aggregation aggregation = new Aggregation();
+            aggregation.setAuthor(dbObject.getString("author"));
+            aggregation.setRepositoryPath(dbObject.getString("repositoryPath"));
+            aggregation.setCount(dbObject.getInt("count"));
+            aggregation.setKey(dbObject.getString(keyAsString));
+            aggregations.add(aggregation);
+        }
+        return aggregations;
     }
     
     @SuppressWarnings("unchecked")
