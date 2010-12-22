@@ -13,8 +13,6 @@ import com.fullsix.committed.core.model.StatsSearchResult;
 import com.fullsix.committed.core.model.SvnSearch;
 import com.fullsix.committed.core.model.SvnSearchResult;
 import com.fullsix.committed.core.model.stats.Aggregation;
-import com.fullsix.committed.core.model.stats.DateAggregation;
-import com.fullsix.committed.core.model.stats.HourAggregation;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.dao.BasicDAO;
 import com.google.code.morphia.query.Query;

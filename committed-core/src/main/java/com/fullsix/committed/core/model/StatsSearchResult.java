@@ -39,7 +39,7 @@ public class StatsSearchResult {
                 String[] splittedKey1 = o1.getKey().split("/");
                 ArrayUtils.reverse(splittedKey1);
                 String[] splittedKey2 = o2.getKey().split("/");
-                ArrayUtils.reverse(o2.getKey().split("/"));
+                ArrayUtils.reverse(splittedKey2);
                 String key1 = StringUtils.arrayToDelimitedString(splittedKey1, "/");
                 String key2 = StringUtils.arrayToDelimitedString(splittedKey2, "/");
                 return key1.compareTo(key2);
