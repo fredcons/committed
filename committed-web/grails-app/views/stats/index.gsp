@@ -14,7 +14,7 @@
     </head>
     <body>
 		<div id="pageBody">
-	        <div class="title">Svn Digger</div>
+	        <div class="title">Statistiques</div>
 	        <table class="main">
 	        	<tr>
 	        		<td class="search bordered">

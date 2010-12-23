@@ -14,7 +14,7 @@
     </head>
     <body>
 		<div id="pageBody">
-	        <div class="title">Svn Digger</div>
+	        <div class="title">Commits</div>
 	        <table class="main">
 	        	<tr>
 	        		<td class="search bordered">
@@ -72,10 +72,15 @@
 	        					<g:each status="i" var="commit" in="${svnSearchResult.commits}">
    									<div class="commitdescription">
    										<b>${commit.revision}</b> le ${commit.formattedDate} par ${commit.author} sur ${commit.repositoryPath} 
+   										<a class="svnlink" target="new" href="${application.svnConfiguration.viewSvnUrl}${commit.friendlyRepositoryPath}/?view=revision&revision=${commit.revision}">view</a>
    									</div>		
    									<div class="filepath">${commit.comment}</div>
    									<g:each status="j" var="commitItem" in="${commit.commitItems}">
-   										<div class="filepath">${commitItem.type} ${commitItem.path}</div>
+   										<div class="filepath">
+   										    ${commitItem.type} ${commitItem.path} 
+   											<a class="svnlink" target="new" href="${application.svnConfiguration.viewSvnUrl}${commit.friendlyRepositoryPath}/${commitItem.path}?revision=${commit.revision}&view=markup">view</a>&nbsp;
+   											<a class="svnlink" target="new" href="${application.svnConfiguration.viewSvnUrl}${commit.friendlyRepositoryPath}/${commitItem.path}?r1=${commit.revision}&r2=${commit.revision - 1}">diff</a>
+   										</div>
    									</g:each><br/>															
 								</g:each>
 							

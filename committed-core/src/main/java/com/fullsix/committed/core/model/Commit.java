@@ -157,6 +157,13 @@ public class Commit {
     public String getRepositoryPath() {
         return this.repositoryPath;
     }
+    
+    /**
+     * @return the repository
+     */
+    public String getFriendlyRepositoryPath() {
+        return "/".equals(this.repositoryPath) ? "/default" : repositoryPath;
+    }
 
     /**
      * @param repository the repository to set
